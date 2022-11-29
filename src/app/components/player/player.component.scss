@@ -3,8 +3,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  display: flex-start;
 }
 
+.now-playing {
+  margin-left: 20px;
+}
 .player-icons {
   display: flex;
   align-content: center;
@@ -17,8 +21,7 @@
 
 .volume {
   position: absolute;
-  left: 0;
-
+  left: 20px;
   justify-content: center;
   padding: 5;
   margin: 4;
@@ -29,10 +32,16 @@
 }
 
 .material-icons {
-  height: 48px;
-  width: 48px;
-  font-size: 48px;
+  height: 36px;
+  width: 36px;
+  font-size: 36px;
 }
+.play {
+  position: absolute;
+  left: 200px;
+  top: 320px;
+}
+
 .material-icons:hover {
   cursor: pointer;
 }

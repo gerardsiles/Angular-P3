@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SongServiceService } from 'src/app/services/song-service.service';
+import { Observable, of, Subject } from 'rxjs';
 
 import { SONGS } from '../../../assets/dummyData';
 import { Song } from '../song/models/Song';
@@ -11,9 +12,11 @@ import { Song } from '../song/models/Song';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public songs: Song[] = [];
+  public songs: Song[];
   public song: Song;
+  public searchResult: Song[] = [];
   searchTitle: string = '';
+  searching: boolean = false;
 
   subscription: Subscription;
 
@@ -21,35 +24,36 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSongs();
-    this.subscription = this.songService
-      .onSearch()
-      .subscribe((value) => (this.songs = value));
   }
 
   public getSongs(): void {
-    this.songs = this.songService.getSongs();
+    this.songService.getSongs().subscribe((songs) => (this.songs = songs));
   }
 
-  filteredSongs(data: string): Song[] {
-    if (this.searchTitle.length > data.length) {
-      this.songs = this.songService.getSongs();
+  filteredSongs(searchTerm: string) {
+    this.searching = true;
+    if (searchTerm.length === 0) {
+      this.searching = false;
     }
-    this.searchTitle = data;
-    console.log('home data ' + this.searchTitle);
+    // Resetear la busqueda al borrar caracter
+    if (this.searchTitle.length > searchTerm.length) {
+      this.searchResult = this.searchSongs(searchTerm);
+    }
+    this.searchTitle = searchTerm;
 
-    if (this.searchTitle === '') {
-      return (this.songs = this.songService.getSongs());
+    if (searchTerm) {
+      // this.songService.search(song).subscribe((songs) => (this.songs = songs));
+      this.searchResult = this.searchSongs(searchTerm);
     } else {
-      return (this.songs = this.songs.filter((song) => {
-        console.log(
-          song.title.toLowerCase().startsWith(this.searchTitle.toLowerCase()) ||
-            song.author.toLowerCase().startsWith(this.searchTitle.toLowerCase())
-        );
-        return (
-          song.title.toLowerCase().startsWith(this.searchTitle.toLowerCase()) ||
-          song.author.toLowerCase().startsWith(this.searchTitle.toLowerCase())
-        );
-      }));
+      return this.getSongs();
     }
+  }
+
+  searchSongs(searchTerm: string) {
+    return this.songs.filter(
+      (song) =>
+        song.title.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+        song.author.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
   }
 }

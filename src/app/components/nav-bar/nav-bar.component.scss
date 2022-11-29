@@ -13,6 +13,9 @@ $black: black;
     @content;
   }
 }
+.song-player {
+  margin-top: 10px;
+}
 
 @mixin desktop {
   @media only screen and (min-width: $layout_bp_desktop) {
@@ -52,6 +55,18 @@ li.active {
 
 .aside {
   display: none;
+  @include tablet {
+    display: flex;
+
+    width: 250px;
+
+    padding-top: 25px;
+
+    background-color: $black;
+
+    position: sticky;
+    top: 0;
+  }
 
   @include desktop {
     display: block;

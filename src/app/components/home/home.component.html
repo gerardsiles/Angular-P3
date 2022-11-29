@@ -7,13 +7,31 @@
     <app-search (search)="filteredSongs($event)"></app-search>
   </div>
 
+  <!-- Search Result -->
+  <h3
+    class="animated fadein results"
+    *ngIf="searchResult.length > 0 && searching"
+  >
+    Results
+  </h3>
+
   <mat-list class="new-releases__new-releases-section">
-    <app-song-item [song]="song" *ngFor="let song of songs"></app-song-item>
-    <!-- Inform if the search is empty -->
+    <app-song-item
+      [song]="song"
+      *ngFor="let song of searchResult"
+    ></app-song-item>
   </mat-list>
-  <div *ngIf="songs.length < 1" class="song-item animated fadeIn">
+  <!-- Inform if the search is empty -->
+  <div
+    *ngIf="searchResult.length < 1 && searching"
+    class="song-item animated fadeIn"
+  >
     <h3 class="no-result">
       Ups! no hay ninguna cancion o artista con ese nombre
     </h3>
   </div>
+  <mat-list class="new-releases__new-releases-section">
+    <app-song-item [song]="song" *ngFor="let song of songs"></app-song-item>
+    <!-- Inform if the search is empty -->
+  </mat-list>
 </div>

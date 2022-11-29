@@ -22,8 +22,6 @@ export class SongItemComponent implements OnInit {
     let songTitle: string = '';
 
     song.type === 'title' ? (songTitle = song.title) : (songTitle = song.title);
-    console.log('song type:', song.type);
-    console.log('song title:', songTitle);
 
     // this.router.navigate(['/artist', songId]);
     this.router.navigate(['/song', songTitle]);
@@ -31,8 +29,6 @@ export class SongItemComponent implements OnInit {
 
   // Method using uiService to load the song to be shown on the player
   renderSong(songItem: Song) {
-    console.log('Emiting event song: ' + JSON.stringify(songItem));
-
     this.uiService.emitSongEvent(songItem);
   }
 

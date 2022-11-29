@@ -1,12 +1,9 @@
 <div class="player">
-  <h3 *ngIf="state.playing">Now playing: {{ state.songTitle }}</h3>
+  <h3 *ngIf="state.playing || state.paused" class="now-playing">
+    Now playing: {{ state.songTitle }}
+  </h3>
   <div class="player-icons">
-    <mat-icon
-      color="accent"
-      class="material-icons"
-      *ngIf="!state.paused"
-      (click)="playStream()"
-    >
+    <mat-icon color="accent" class="material-icons play" (click)="playStream()">
       play_arrow
     </mat-icon>
     <mat-icon color="accent" *ngIf="state.playing" (click)="togglePause()"
@@ -31,7 +28,7 @@
       [value]="state.currentTime"
       (input)="onSliderChangeEnd($event)"
     ></mat-slider>
-    {{ state.readableDuration }}
+    {{ state.readableTimeLeft }}
   </div>
 </div>
 

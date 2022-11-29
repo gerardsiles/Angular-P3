@@ -37,7 +37,6 @@ export class SongComponent implements OnInit {
   public getActivatedRoute(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.songTitle = params['id'];
-      console.log('Activated Route Id', params['id']);
     });
   }
 }

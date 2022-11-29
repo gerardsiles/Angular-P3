@@ -1,39 +1,43 @@
 <form [formGroup]="songSection">
   <mat-list-item class="song-detail" *ngIf="song">
-    <img src="{{ song.cover }}" alt="Portada album" />
-    <input
-      class="input"
-      type="text"
-      formControlName="title"
-      placeholder="Titulo: {{ song.title }}"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="author"
-      placeholder="Autor: {{ song.author }}"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="group"
-      placeholder="Grupo: {{ song.group }}"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="year"
-      placeholder="Ano: {{ song.year }}"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="album"
-      placeholder="Album: {{ song.album }}"
-    />
+    <div class="cover-container">
+      <img src="{{ song.cover }}" alt="Portada album" />
+    </div>
+    <div class="song-detail-container">
+      <input
+        class="input"
+        type="text"
+        formControlName="title"
+        placeholder="Titulo: {{ song.title }}"
+      />
+      <input
+        class="input"
+        type="text"
+        formControlName="author"
+        placeholder="Autor: {{ song.author }}"
+      />
+      <input
+        class="input"
+        type="text"
+        formControlName="group"
+        placeholder="Grupo: {{ song.group }}"
+      />
+      <input
+        class="input"
+        type="text"
+        formControlName="year"
+        placeholder="Ano: {{ song.year }}"
+      />
+      <input
+        class="input"
+        type="text"
+        formControlName="album"
+        placeholder="Album: {{ song.album }}"
+      />
 
-    <p>BPM: {{ song.bpm }}</p>
-    <p>Duracion: {{ song.length }}</p>
-    <p>Genero: {{ song.genre }}</p>
+      <p>BPM: {{ song.bpm }}</p>
+      <p>Duracion: {{ song.length }}</p>
+      <p>Genero: {{ song.genre }}</p>
+    </div>
   </mat-list-item>
 </form>

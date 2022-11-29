@@ -4,6 +4,7 @@ export interface StreamState {
   paused: boolean;
   readableCurrentTime: string;
   readableDuration: string;
+  readableTimeLeft: string;
   duration: number | undefined;
   currentTime: number | undefined;
   volume: number;
